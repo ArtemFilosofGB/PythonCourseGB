@@ -27,3 +27,9 @@ for key in dct:
 
 my_set = {1,2,3,4}
 my_set = {1:"one",2:"two",3:"thee",4:"four"}
+
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+print(matrix)
+
+for item in matrix:
+    print(item)
