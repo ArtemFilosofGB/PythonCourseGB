@@ -25,7 +25,7 @@ for key in dct:
     print(dct.get(key))
 
 
-my_set = {1,2,3,4}  # множество
+my_set = {1,2,3,4}  # множество (нет повторов )
 my_set = {1:"one",2:"two",3:"thee",4:"four"}
 
 matrix = [[1,2,3],[4,5,6],[7,8,9]]
