@@ -26,3 +26,8 @@ for i in range(len(a)):
     a[i] = int(a[i])
 print(a)
 print(type(a))
+for i in range(100):
+    print()
+    if i=10:
+        if i=20:
+

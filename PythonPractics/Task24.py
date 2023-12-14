@@ -13,6 +13,9 @@
 # заданной во входном файле грядки
 # 4 -> 1 2 3 4
 # 9
+import random
+
+#arr=[random.randint(1,15) for _ in range(10)]
 
 arr = [5, 8, 6, 4, 9, 2, 7, 3]
 
@@ -21,4 +24,12 @@ max_blueberry = 0
 for i in range(len(arr) - 2):
     if arr[i] + arr[i + 1] + arr[i + 2] > max_blueberry:
         max_blueberry = arr[i] + arr[i + 1] + arr[i + 2]
+print(max_blueberry)
+
+#Вариант с отрицательными индексами
+max_blueberry = 0
+for i in range(len(arr)):
+    res=arr[i-2] + arr[i - 1] + arr[i]
+    if res > max_blueberry:
+        max_blueberry = res
 print(max_blueberry)

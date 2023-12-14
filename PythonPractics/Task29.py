@@ -30,3 +30,15 @@ while n > 0:
         max_number = n
     n = int(input())
 print(max_number)
+
+# function print max number of list
+def max_num(x):
+    max = x[0]
+    for i in x:
+        if max < i:
+            max = i
+    return max
+
+# function prints hello world
+def hello_world():
+    print("Hello World!")

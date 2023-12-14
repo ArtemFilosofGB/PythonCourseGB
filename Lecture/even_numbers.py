@@ -30,10 +30,10 @@ def sqrt(a):
 
 #variant3
 
-
-res = map(int, lst)
+print(lst)
+res = map(int, lst) #memory address of the map object.
 print(res) #выводит адрес map
-res = filter(lambda x: x % 2 == 0, res)
+res = filter(lambda x: x % 2 == 0, res) #filter returns an iterator object, so when you print res, you see the memory address of the filter object
 print(res) #выводит адрес filter
 res = list(map(lambda x: (x, sqrt(x)), res))
 print(res)
