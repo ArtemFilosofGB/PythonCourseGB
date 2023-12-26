@@ -36,10 +36,10 @@ def print_menu():
     print("=" * 30)
     print("1. Create contact")
     print("2. Change contact")
-    print("3. Find contact")
-    print("4. Delete contact")
-    print("5. Show contact")
-    print("6. Exit")
+    print("3. Find contact") #done
+    print("4. Delete contact") #done
+    print("5. Show contact")#done
+    print("6. Exit")#done
     print("=" * 30)
 
 
@@ -58,13 +58,12 @@ def change_contact(file_name):
     # переписать с искользованием функции поска в функции изменения
     # использовать функцию удаления для изменения
     print("=====Изменение контакта=====")
-    with open(file_name, 'r') as data:
-        for line in data:
-            print(line, end="")
-    name = input("Введите имя контакта;")
+    show_contact(file_name)
+    name = input("Введите имя контакта для изменения: ")
     t_number = input("Введите телефон;")
     nikname = input("Введите никнейм;")
     string = f"{name};{t_number};{nikname}\n"
+    delete_contact(file_name, name)
     with open(file_name, 'a') as data:
         data.writelines(string)
 
@@ -76,42 +75,38 @@ def find_contact(file_name,name=""):
     with open(file_name, 'r') as data:
         for line in data:
             if name.lower() in line.lower():
-                print(line)
+                print(line, end="")
         else:
             print("Контакт не найден")
 
 
 def show_contact(file_name):
     print("=====Cписок контактов=====")
-    print("Колличество контактов - ", count_contact())
+    print("Колличество контактов - ", str(count_contact()))
     with open(file_name, 'r') as data:
         for line in data:
             print(line, end="")
-          #  lines = data.readlines()
-    #     print(lines,"***********")
-    # return lines
+
 
 def read_file_lines(file_name):
     with open(file_name, 'r') as file:
         lines = file.readlines()
     return lines
 
-def delete_contact(file_name):
-    print("=====Удаление контакта=====")
+def delete_contact(file_name, name=""):
+    print("=====Удаление контакта=====", name)
     lines = read_file_lines(file_name)  # return list
+    show_contact(file_name)
     print("Внимание происходит удаление контакта! \'0\' для отмены")
-    name = input("Введите имя контакта: ")
-    if name == '0':
-        print("Отмена")
-        return 0
-find_contact(FILE_NAME, name)
-
-    with open(FILE_NAME, "r") as file:
-        lines = file.readlines()
-    del lines[1]
-    with open(FILE_NAME, "w") as file:
-        file.writelines(lines)
-
+    if name == "":
+        name = input("Введите имя контакта: ")
+        if name == '0':
+            print("Отмена")
+            return 0
+    with open(file_name, 'w') as file:
+        for line in lines:
+            if name not in line:
+                file.write(line)
 
 
 def count_contact(file_name=FILE_NAME):
@@ -125,7 +120,7 @@ def count_contact(file_name=FILE_NAME):
 
 
 def main():
-   # print("Колличество контактов - ", count_contact())
+    print("Колличество контактов - ", count_contact())
     while True:
         print_menu()
         user_choice = int(input())
@@ -146,9 +141,10 @@ def main():
             show_contact(FILE_NAME)
         # "6. Exit"
         elif user_choice == 6:
+            print("Good bye!")
             break
 
 
 if __name__ == '__main__':
     main()
-    print("Good bye!")
+
