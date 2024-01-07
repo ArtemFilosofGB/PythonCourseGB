@@ -29,7 +29,7 @@ def cls():
     print('\n' * 100)
 
 
-FILE_NAME = "../contacts.txt"
+FILE_NAME = "contacts.txt"
 
 
 def print_menu():
