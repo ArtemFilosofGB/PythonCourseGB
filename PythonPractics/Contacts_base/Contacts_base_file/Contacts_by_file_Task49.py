@@ -29,17 +29,17 @@ def cls():
     print('\n' * 100)
 
 
-FILE_NAME = "contacts.txt"
+FILE_NAME = "../contacts.txt"
 
 
 def print_menu():
     print("=" * 30)
-    print("1. Create contact")
-    print("2. Change contact")
-    print("3. Find contact") #done
-    print("4. Delete contact") #done
-    print("5. Show contact")#done
-    print("6. Exit")#done
+    print("1. Создание")
+    print("2. Изменение")
+    print("3. Поиск") #done
+    print("4. Удаление") #done
+    print("5. Показать книгу")#done
+    print("6. Выход")#done
     print("=" * 30)
 
 
