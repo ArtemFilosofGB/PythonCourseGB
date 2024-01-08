@@ -128,3 +128,5 @@ lbl = Label(window, text="Всего контактов: " + str(count_contact(d
 lbl.grid(column=0, row=0)
 pritn_button_menu()
 window.mainloop()
+
+#Когда же эта прогшрамма заработает как надо!!!!
