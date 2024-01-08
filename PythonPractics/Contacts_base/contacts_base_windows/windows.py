@@ -72,16 +72,59 @@ def exit():
     #window.quit()
 
 def change_contact(dbase):
+    def btn_change_press():
+        pass
     pass
 
-def find_contact(dbase):
-    pass
+def find_contact():
+    def btn_find_press():
+        # Получаем данные из полей ввода
+        pass
+
+
+    # Создание всплывающего окна
+    window_find = Toplevel(window)
+    window_find.title("Поиск контакта")
+    window_find.geometry('400x200')
+
+
+
+    # Метка описания
+    lbl_create = Label(window_find, text="=====Поиск контакта=====")
+    lbl_create.pack()
+
+    # Поля ввода
+    name_find = Entry(window_find, width=40)
+    name_find.pack()
+    find_btn = Button(window_find, text="Поиск", command=btn_find_press)
+    find_btn.pack()
+
+    #     pass
+    #     # for line in dbase:
+    #     #     if find_field.get() in line:
+    #     #         print("Найден контакт: ", line, end="")
+    #     #
+    #     #     else:
+    #     #         print("Контакт не найден")
+    #
+    # window_find = Toplevel(window)
+    # window_find.title("Поиск контакта")
+    # window_find.geometry('200x200')
+    #
+    # lbl_find = Label(window_find, text="Что ищем?")
+    # lbl_find.pack()
+    # find_field = Entry(window_find, width=40)
+    # find_field.pack()
+    # btn_find = Button(window_find, text="Поиск", command=btn_find_press)
+    # btn_find.pack()
+    # print("Поиск контакта...")
 
 def delete_contact(dbase):
     pass
 
 def show_contacts():
     create_scrollable_window()
+    print(dbase)
 def create_scrollable_window():
     # Создание всплывающего окна для отображения контактов
     window_contacts = Toplevel(window)
@@ -102,21 +145,8 @@ def count_contact(dbase):
 def console_out():
     print(dbase)
 
-def pritn_button_menu():
-    bnt1 = Button(window, text="Create Contact", command=create_contact, width=20)
-    bnt1.grid(column=0, row=2)
-    bnt2 = Button(window, text="Change Contact", command=change_contact(dbase), width=20)
-    bnt2.grid(column=0, row=3)
-    bnt3 = Button(window, text="Find Contact", command=find_contact(dbase), width=20)
-    bnt3.grid(column=0, row=4)
-    bnt4 = Button(window, text="Delete Contact", command=delete_contact(dbase), width=20)
-    bnt4.grid(column=0, row=5)
-    bnt5 = Button(window, text="Show Contact", command=show_contacts, width=20)
-    bnt5.grid(column=0, row=6)
-    bnt6 = Button(window, text="Save & Exit", command=exit, width=20)
-    bnt6.grid(column=0, row=7)
-    bnt7 = Button(window, text="console out", command=console_out, width=20)
-    bnt7.grid(column=0, row=8)
+
+
 
 
 
@@ -126,7 +156,24 @@ window.title("Контакты")
 window.geometry('400x800')
 lbl = Label(window, text="Всего контактов: " + str(count_contact(dbase)))
 lbl.grid(column=0, row=0)
-pritn_button_menu()
+
+# Кнопки
+bnt1 = Button(window, text="Create Contact", command=create_contact, width=20)
+bnt1.grid(column=0, row=2)
+bnt2 = Button(window, text="Change Contact", command=change_contact(dbase), width=20)
+bnt2.grid(column=0, row=3)
+bnt3 = Button(window, text="Find Contact", command=find_contact, width=20)
+bnt3.grid(column=0, row=4)
+bnt4 = Button(window, text="Delete Contact", command=delete_contact(dbase), width=20)
+bnt4.grid(column=0, row=5)
+bnt5 = Button(window, text="Show Contact", command=show_contacts, width=20)
+bnt5.grid(column=0, row=6)
+bnt6 = Button(window, text="Save & Exit", command=exit, width=20)
+bnt6.grid(column=0, row=7)
+bnt7 = Button(window, text="console out", command=console_out, width=20)
+bnt7.grid(column=0, row=8)
+
+# Запуск цикла
 window.mainloop()
 
 #Когда же эта прогшрамма заработает как надо!!!!
