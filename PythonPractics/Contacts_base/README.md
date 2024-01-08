@@ -24,4 +24,4 @@ _Вариант исполнения основанный на работе со
 ### Contacts_base_windows
 _Оконная реализация записной книги, использована библионека **Tkinter**_
 
-![window](PythonCourseGB/PythonPractics/Contacts_base/contacts_base_windows/window.png)
+![window](window.png)
