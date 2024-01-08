@@ -79,19 +79,25 @@ def change_contact(dbase):
 def find_contact():
     def btn_find_press():
         # Получаем данные из полей ввода
-        pass
+        name_find_value = name_find.get()
+        for line in dbase:
+            if name_find_value in line:
+                lbl_find['text'] = "Найден контакт: " + line
+                print("Найден контакт: ", line, end="")
+        else:
+            print("Контакт не найден")
 
 
     # Создание всплывающего окна
     window_find = Toplevel(window)
     window_find.title("Поиск контакта")
-    window_find.geometry('400x200')
+    window_find.geometry('300x100')
 
 
 
     # Метка описания
-    lbl_create = Label(window_find, text="=====Поиск контакта=====")
-    lbl_create.pack()
+    lbl_find = Label(window_find, text="=====Поиск контакта=====")
+    lbl_find.pack()
 
     # Поля ввода
     name_find = Entry(window_find, width=40)
@@ -99,25 +105,6 @@ def find_contact():
     find_btn = Button(window_find, text="Поиск", command=btn_find_press)
     find_btn.pack()
 
-    #     pass
-    #     # for line in dbase:
-    #     #     if find_field.get() in line:
-    #     #         print("Найден контакт: ", line, end="")
-    #     #
-    #     #     else:
-    #     #         print("Контакт не найден")
-    #
-    # window_find = Toplevel(window)
-    # window_find.title("Поиск контакта")
-    # window_find.geometry('200x200')
-    #
-    # lbl_find = Label(window_find, text="Что ищем?")
-    # lbl_find.pack()
-    # find_field = Entry(window_find, width=40)
-    # find_field.pack()
-    # btn_find = Button(window_find, text="Поиск", command=btn_find_press)
-    # btn_find.pack()
-    # print("Поиск контакта...")
 
 def delete_contact(dbase):
     pass
