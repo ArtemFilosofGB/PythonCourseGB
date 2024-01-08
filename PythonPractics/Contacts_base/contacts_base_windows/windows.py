@@ -5,8 +5,14 @@ dbase=[]
 
 
 def open_file(file_name):
-    with open(file_name, 'r') as file:
-        lines = file.readlines()
+    try:
+        with open(file_name, 'r') as file:
+            lines = file.readlines()
+    except Exception as e:
+        print(e)
+        print("Не удалось открыть файл")
+        with open(file_name, 'a') as file:
+            lines = []
     return lines
 
 # Функция создания контакта
@@ -18,11 +24,13 @@ def create_contact():
         nikname_value = nikname.get()
 
         # Формируем строку контакта и добавляем в базу данных контактов
-        str_contact = f"{name_value};{t_number_value};{nikname_value}"
-        dbase.append(str_contact)
+        # str_contact = f"{name_value};{t_number_value};{nikname_value}\n"
+        # dbase.append(str_contact)
+        contact_str = f"{name_value};{t_number_value};{nikname_value}\n"
+        dbase.append(contact_str)
 
         # Для отладки: печатаем содержимое dbase
-        print(f'Добавлен контакт: {str_contact}')
+        print(f'Добавлен контакт: {contact_str}')
         print(dbase)
 
         # Закрываем всплывающее окно
@@ -53,9 +61,14 @@ def create_contact():
 
 
 
-def exit(dbase: list):
-    with open(FILE_NAME, 'w') as file:
-        file.writelines(dbase)
+def exit():
+    try:
+        with open(FILE_NAME, 'w') as file:
+            file.writelines(dbase)
+    except Exception as e:
+        print(e)
+        print("Не удалось сохранить данные в файл")
+    print("Завершение работы программы")
     #window.quit()
 
 def change_contact(dbase):
@@ -86,7 +99,8 @@ def create_scrollable_window():
 def count_contact(dbase):
     return len(dbase)
 
-
+def console_out():
+    print(dbase)
 
 def pritn_button_menu():
     bnt1 = Button(window, text="Create Contact", command=create_contact, width=20)
@@ -99,8 +113,11 @@ def pritn_button_menu():
     bnt4.grid(column=0, row=5)
     bnt5 = Button(window, text="Show Contact", command=show_contacts, width=20)
     bnt5.grid(column=0, row=6)
-    bnt6 = Button(window, text="Save & Exit", command=exit(dbase), width=20)
+    bnt6 = Button(window, text="Save & Exit", command=exit, width=20)
     bnt6.grid(column=0, row=7)
+    bnt7 = Button(window, text="console out", command=console_out, width=20)
+    bnt7.grid(column=0, row=8)
+
 
 
 dbase = open_file(FILE_NAME)
@@ -112,4 +129,4 @@ lbl.grid(column=0, row=0)
 pritn_button_menu()
 window.mainloop()
 
-
+#Когда же эта прогшрамма заработает как надо!!!!
