@@ -1,7 +1,8 @@
 from tkinter import Tk, Label, Entry, Button, Toplevel, scrolledtext
+
 USER_NAME = "admin"
 FILE_NAME = "contacts.txt"
-dbase=[]
+dbase = []
 
 
 def open_file(file_name):
@@ -15,6 +16,7 @@ def open_file(file_name):
             lines = []
     return lines
 
+
 # Функция создания контакта
 def create_contact():
     def btn_create_press():
@@ -24,8 +26,6 @@ def create_contact():
         nikname_value = nikname.get()
 
         # Формируем строку контакта и добавляем в базу данных контактов
-        # str_contact = f"{name_value};{t_number_value};{nikname_value}\n"
-        # dbase.append(str_contact)
         contact_str = f"{name_value};{t_number_value};{nikname_value}\n"
         dbase.append(contact_str)
 
@@ -45,7 +45,7 @@ def create_contact():
     lbl_create = Label(window_create, text="=====Создание контакта=====")
     lbl_create.pack()
 
-    # Поля ввода
+    # Поля ввода на форме создания контакта
     name = Entry(window_create, width=40)
     name.pack()
     t_number = Entry(window_create, width=40)
@@ -58,9 +58,6 @@ def create_contact():
     btn_create.pack()
 
 
-
-
-
 def exit():
     try:
         with open(FILE_NAME, 'w') as file:
@@ -69,12 +66,15 @@ def exit():
         print(e)
         print("Не удалось сохранить данные в файл")
     print("Завершение работы программы")
-    #window.quit()
+    # window.quit()
 
-def change_contact(dbase):
+
+def change_contact():
     def btn_change_press():
         pass
+
     pass
+
 
 def find_contact():
     def btn_find_press():
@@ -87,13 +87,10 @@ def find_contact():
         else:
             print("Контакт не найден")
 
-
     # Создание всплывающего окна
     window_find = Toplevel(window)
     window_find.title("Поиск контакта")
     window_find.geometry('300x100')
-
-
 
     # Метка описания
     lbl_find = Label(window_find, text="=====Поиск контакта=====")
@@ -106,12 +103,56 @@ def find_contact():
     find_btn.pack()
 
 
-def delete_contact(dbase):
-    pass
+def delete_contact():
+    def btn_delete_press():
+        def btn_alert_delete_press():
+            dbase.remove(line)
+            alert_delete.destroy()
+            print("Контакт удален")
+            lbl_delete['text'] = "Контакт удален {}".format(line)
+
+        # Получаем данные из полей ввода
+        name_delete_value = name_delete.get()
+        print(name_delete_value)
+        for line in dbase:
+            print(line)
+            if name_delete_value in line:
+                alert_delete = Toplevel(window_delete)
+                alert_delete.title(f"Удалить {line} ?")
+                alert_delete.geometry('300x100')
+
+                btn_alert_delete = Button(alert_delete, text="Удалить", command=btn_alert_delete_press)
+                btn_alert_delete.pack()
+                btn_alert_cancel = Button(alert_delete, text="Отмена", command=alert_delete.destroy)
+                btn_alert_cancel.pack()
+        else:
+            print("Контакт не найден")
+            lbl_delete['text'] = "Контакт не найден"
+        # window_delete.destroy()
+
+    window_delete = Toplevel(window)
+    window_delete.title("Удаление контакта")
+    window_delete.geometry('300x100')
+
+    #метка на форме удаления
+    lbl_delete = Label(window_delete, text="=====Удаление контакта=====")
+    lbl_delete.pack()
+
+    #поля ввода на форме удаления
+    name_delete = Entry(window_delete, width=40)
+    name_delete.pack()
+
+    #кнопка удаления контакта
+    delete_btn = Button(window_delete, text="Удалить", command=btn_delete_press)
+    delete_btn.pack()
+
+
 
 def show_contacts():
     create_scrollable_window()
     print(dbase)
+
+
 def create_scrollable_window():
     # Создание всплывающего окна для отображения контактов
     window_contacts = Toplevel(window)
@@ -129,39 +170,43 @@ def create_scrollable_window():
 def count_contact(dbase):
     return len(dbase)
 
+
 def console_out():
     print(dbase)
-
-
-
-
 
 
 dbase = open_file(FILE_NAME)
 window = Tk()
 window.title("Контакты")
-window.geometry('400x800')
+window.geometry('345x800')
 lbl = Label(window, text="Всего контактов: " + str(count_contact(dbase)))
 lbl.grid(column=0, row=0)
 
 # Кнопки
-bnt1 = Button(window, text="Create Contact", command=create_contact, width=20)
+bnt1 = Button(window, text="Create Contact", command=create_contact, width=40)
 bnt1.grid(column=0, row=2)
-bnt2 = Button(window, text="Change Contact", command=change_contact(dbase), width=20)
+bnt2 = Button(window, text="Change Contact", command=change_contact, width=40)
 bnt2.grid(column=0, row=3)
-bnt3 = Button(window, text="Find Contact", command=find_contact, width=20)
+bnt3 = Button(window, text="Find Contact", command=find_contact, width=40)
 bnt3.grid(column=0, row=4)
-bnt4 = Button(window, text="Delete Contact", command=delete_contact(dbase), width=20)
+bnt4 = Button(window, text="Delete Contact", command=delete_contact, width=40)
 bnt4.grid(column=0, row=5)
-bnt5 = Button(window, text="Show Contact", command=show_contacts, width=20)
+bnt5 = Button(window, text="Show Contact", command=show_contacts, width=40)
 bnt5.grid(column=0, row=6)
-bnt6 = Button(window, text="Save & Exit", command=exit, width=20)
+bnt6 = Button(window, text="Save & Exit", command=exit, width=40)
 bnt6.grid(column=0, row=7)
-bnt7 = Button(window, text="console out", command=console_out, width=20)
+bnt7 = Button(window, text="console out", command=console_out, width=40)
 bnt7.grid(column=0, row=8)
+
+#отображение контактов на главном экране
+list_contacts = scrolledtext.ScrolledText(window, width=40, height=30)
+list_contacts.grid(column=0, row=9)
+#Заполнение многострочного поля данными из dbase
+for contact in dbase:
+    list_contacts.insert('end', contact + '\n')
 
 # Запуск цикла
 window.mainloop()
 
-#Когда же эта прогшрамма заработает как надо!!!!
-#Когда же эта прогшрамма заработает как надо!!!!
+# Когда же эта прогшрамма заработает как надо!!!!
+# Когда же эта прогшрамма заработает как надо!!!!
