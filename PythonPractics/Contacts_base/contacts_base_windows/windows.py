@@ -35,6 +35,7 @@ def create_contact():
 
         # Закрываем всплывающее окно
         window_create.destroy()
+        show_contacts_in_window()
 
     # Создание всплывающего окна
     window_create = Toplevel(window)
@@ -110,6 +111,7 @@ def delete_contact():
             alert_delete.destroy()
             print("Контакт удален")
             lbl_delete['text'] = "Контакт удален {}".format(line)
+            show_contacts_in_window()
 
         # Получаем данные из полей ввода
         name_delete_value = name_delete.get()
@@ -173,13 +175,19 @@ def count_contact(dbase):
 
 def console_out():
     print(dbase)
+def show_contacts_in_window():
+    lbl = Label(window, text="Всего контактов: " + str(count_contact(dbase)))
+    lbl.grid(column=0, row=0)
+    list_contacts.delete('1.0', 'end')
+    for contact in dbase:
+        list_contacts.insert('end', contact + '\n')
 
 
 dbase = open_file(FILE_NAME)
 window = Tk()
 window.title("Контакты")
 window.geometry('345x800')
-lbl = Label(window, text="Всего контактов: " + str(count_contact(dbase)))
+lbl = Label(window, text="")
 lbl.grid(column=0, row=0)
 
 # Кнопки
@@ -198,12 +206,13 @@ bnt6.grid(column=0, row=7)
 bnt7 = Button(window, text="console out", command=console_out, width=40)
 bnt7.grid(column=0, row=8)
 
+
 #отображение контактов на главном экране
 list_contacts = scrolledtext.ScrolledText(window, width=40, height=30)
 list_contacts.grid(column=0, row=9)
+
 #Заполнение многострочного поля данными из dbase
-for contact in dbase:
-    list_contacts.insert('end', contact + '\n')
+show_contacts_in_window()
 
 # Запуск цикла
 window.mainloop()
