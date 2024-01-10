@@ -72,9 +72,41 @@ def exit():
 
 def change_contact():
     def btn_change_press():
-        pass
+        def btn_change_ok_press():
+            print(f"Контакт {line} изменен на {name_to_change_ent.get()} {number_to_change_ent.get()} {nikname_to_change_ent.get()}")
+            dbase.remove(line)
+            dbase.append(f"{name_to_change_ent.get()};{number_to_change_ent.get()};{nikname_to_change_ent.get()}\n")
+            show_contacts_in_window()
+            window_changre.destroy()
 
-    pass
+
+        name_to_change = name_change.get()
+        lbl_change_press =Label(window_changre, text=f"Поиск контакта {name_to_change}")
+        lbl_change_press.pack()
+        for line in dbase:
+            if name_to_change in line:
+                name_to_change_ent = Entry(window_changre, width=40)
+                name_to_change_ent.pack()
+                name_to_change_ent.insert(0, line)
+                number_to_change_ent = Entry(window_changre, width=40)
+                number_to_change_ent.pack()
+                nikname_to_change_ent = Entry(window_changre, width=40)
+                nikname_to_change_ent.pack()
+                btn_change_ok = Button(window_changre, text="Изменить", command=btn_change_ok_press)
+                btn_change_ok.pack()
+                btn_change_cancel = Button(window_changre, text="Отмена", command=window_changre.destroy)
+                btn_change_cancel.pack()
+
+    window_changre = Toplevel(window)
+    window_changre.title("Изменение контакта")
+    window_changre.geometry('400x200')
+
+    name_change= Entry(window_changre, width=40)
+    name_change.pack()
+
+    btn_change = Button(window_changre, text="Изменить контакт", command=btn_change_press)
+    btn_change.pack()
+
 
 
 def find_contact():
@@ -186,7 +218,7 @@ def show_contacts_in_window():
 dbase = open_file(FILE_NAME)
 window = Tk()
 window.title("Контакты")
-window.geometry('345x800')
+window.geometry('345x740')
 lbl = Label(window, text="")
 lbl.grid(column=0, row=0)
 
@@ -213,6 +245,12 @@ list_contacts.grid(column=0, row=9)
 
 #Заполнение многострочного поля данными из dbase
 show_contacts_in_window()
+
+lbl_bottom=Label(window, text="Рабочая база {}".format(FILE_NAME))
+lbl_bottom.grid(column=0, row=10)
+
+lbl_bottom2=Label(window, text="Данные сохраняются только после корректного выхода")
+lbl_bottom2.grid(column=0, row=11)
 
 # Запуск цикла
 window.mainloop()
